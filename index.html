@@ -3,350 +3,334 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Brian Kirinya | Case Manager & Community Advocate</title>
+    <title>Brian Kirinya - Professional Case Manager</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        .hero-gradient {
-            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+        /* Custom CSS for animations and effects */
+        .hero-bg {
+            background: linear-gradient(135deg, rgba(30, 58, 138, 0.9) 0%, rgba(79, 70, 229, 0.8) 100%), url('https://images.unsplash.com/photo-1450101499163-c8848c66ca85?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80') no-repeat center center;
+            background-size: cover;
         }
+        
         .card-hover:hover {
             transform: translateY(-5px);
             box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
         }
-        .transition-slow {
-            transition: all 0.5s ease;
+        
+        .fade-in {
+            animation: fadeIn 1s ease-in;
         }
-        .testimonial-bg {
-            background-color: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(5px);
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .slide-up {
+            animation: slideUp 0.8s ease-out;
+        }
+        
+        @keyframes slideUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        .testimonial-card {
+            transition: all 0.3s ease;
+        }
+        
+        .testimonial-card:hover {
+            background-color: #f8fafc;
+        }
+        
+        /* Custom tab system */
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.5s ease-in;
+        }
+        
+        .tab-btn.active {
+            border-bottom: 3px solid #4f46e5;
+            color: #4f46e5;
+            font-weight: 600;
         }
     </style>
 </head>
-<body class="font-sans antialiased text-gray-800 bg-gray-50">
+<body class="font-sans bg-gray-50">
     <!-- Navigation -->
-    <nav class="bg-white shadow-sm sticky top-0 z-50">
+    <nav class="bg-white shadow-md sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16">
                 <div class="flex items-center">
                     <div class="flex-shrink-0 flex items-center">
-                        <i class="fas fa-hands-helping text-blue-600 text-2xl mr-2"></i>
-                        <span class="text-xl font-bold text-blue-600">Brian Kirinya</span>
+                        <i class="fas fa-hands-helping text-indigo-600 text-2xl mr-2"></i>
+                        <span class="text-xl font-bold text-gray-900">Brian Kirinya</span>
                     </div>
                 </div>
-                <div class="hidden sm:ml-6 sm:flex sm:space-x-8">
-                    <a href="#home" class="border-blue-500 text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">Home</a>
-                    <a href="#about" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">About</a>
-                    <a href="#services" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">Services</a>
-                    <a href="#testimonials" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">Testimonials</a>
-                    <a href="#contact" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">Contact</a>
+                <div class="hidden md:ml-6 md:flex md:items-center md:space-x-8">
+                    <a href="#home" class="text-gray-900 hover:text-indigo-600 px-3 py-2 text-sm font-medium">Home</a>
+                    <a href="#services" class="text-gray-900 hover:text-indigo-600 px-3 py-2 text-sm font-medium">Services</a>
+                    <a href="#about" class="text-gray-900 hover:text-indigo-600 px-3 py-2 text-sm font-medium">About</a>
+                    <a href="#testimonials" class="text-gray-900 hover:text-indigo-600 px-3 py-2 text-sm font-medium">Testimonials</a>
+                    <a href="#contact" class="bg-indigo-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-indigo-700 transition duration-300">Contact Me</a>
                 </div>
-                <div class="-mr-2 flex items-center sm:hidden">
-                    <button type="button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500" aria-controls="mobile-menu" aria-expanded="false" id="mobile-menu-button">
-                        <span class="sr-only">Open main menu</span>
-                        <i class="fas fa-bars text-xl"></i>
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-button" class="text-gray-500 hover:text-gray-900 focus:outline-none">
+                        <i class="fas fa-bars text-2xl"></i>
                     </button>
                 </div>
             </div>
         </div>
-
+        
         <!-- Mobile menu -->
-        <div class="sm:hidden hidden" id="mobile-menu">
-            <div class="pt-2 pb-4 space-y-1">
-                <a href="#home" class="bg-blue-50 border-blue-500 text-blue-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium">Home</a>
-                <a href="#about" class="border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium">About</a>
-                <a href="#services" class="border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium">Services</a>
-                <a href="#testimonials" class="border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium">Testimonials</a>
-                <a href="#contact" class="border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium">Contact</a>
+        <div id="mobile-menu" class="hidden md:hidden bg-white shadow-lg">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#home" class="block px-3 py-2 text-base font-medium text-gray-900 hover:text-indigo-600">Home</a>
+                <a href="#services" class="block px-3 py-2 text-base font-medium text-gray-900 hover:text-indigo-600">Services</a>
+                <a href="#about" class="block px-3 py-2 text-base font-medium text-gray-900 hover:text-indigo-600">About</a>
+                <a href="#testimonials" class="block px-3 py-2 text-base font-medium text-gray-900 hover:text-indigo-600">Testimonials</a>
+                <a href="#contact" class="block px-3 py-2 text-base font-medium text-white bg-indigo-600 rounded-md hover:bg-indigo-700">Contact Me</a>
             </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section id="home" class="hero-gradient text-white py-20">
+    <section id="home" class="hero-bg text-white py-20 md:py-32 fade-in">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="md:flex items-center">
-                <div class="md:w-1/2 mb-10 md:mb-0">
-                    <h1 class="text-4xl md:text-5xl font-bold leading-tight mb-4">Brian Kirinya</h1>
-                    <h2 class="text-2xl md:text-3xl font-semibold mb-6">Case Manager at Key2Care</h2>
-                    <p class="text-lg mb-8 opacity-90">Dedicated to fostering community harmony through compassionate case management and advocacy.</p>
+            <div class="md:flex md:items-center md:justify-between">
+                <div class="md:w-1/2 mb-10 md:mb-0 slide-up">
+                    <h1 class="text-4xl md:text-5xl font-bold mb-4">Brian Kirinya</h1>
+                    <h2 class="text-2xl md:text-3xl font-semibold mb-6">Professional Case Manager</h2>
+                    <p class="text-lg mb-8">Dedicated to providing comprehensive case management services with compassion, expertise, and personalized attention.</p>
                     <div class="flex space-x-4">
-                        <a href="#contact" class="bg-white text-blue-600 hover:bg-gray-100 px-6 py-3 rounded-lg font-medium transition-slow">Get In Touch</a>
-                        <a href="#services" class="border-2 border-white text-white hover:bg-white hover:text-blue-600 px-6 py-3 rounded-lg font-medium transition-slow">Learn More</a>
+                        <a href="#contact" class="bg-white text-indigo-600 px-6 py-3 rounded-md font-medium hover:bg-gray-100 transition duration-300">Get Started</a>
+                        <a href="#services" class="border border-white text-white px-6 py-3 rounded-md font-medium hover:bg-white hover:text-indigo-600 transition duration-300">Learn More</a>
                     </div>
                 </div>
-                <div class="md:w-1/2 flex justify-center">
-                    <div class="relative">
-                        <div class="w-64 h-64 md:w-80 md:h-80 bg-white rounded-full overflow-hidden shadow-xl">
-                            <!-- Placeholder for profile image -->
-                            <div class="w-full h-full bg-gray-200 flex items-center justify-center">
-                                <i class="fas fa-user text-blue-600 text-6xl"></i>
-                            </div>
-                        </div>
-                        <div class="absolute -bottom-5 -right-5 bg-blue-500 text-white rounded-full p-4 shadow-lg">
-                            <i class="fas fa-hands-helping text-2xl"></i>
-                        </div>
+                <div class="md:w-1/2 flex justify-center slide-up">
+                    <div class="bg-white rounded-lg shadow-xl overflow-hidden w-64 h-64 md:w-80 md:h-80">
+                        <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Brian Kirinya" class="w-full h-full object-cover">
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- About Section -->
-    <section id="about" class="py-20 bg-white">
+    <!-- Stats Section -->
+    <section class="bg-indigo-50 py-12">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl font-bold text-gray-900 mb-4">About Brian</h2>
-                <div class="w-20 h-1 bg-blue-600 mx-auto"></div>
-            </div>
-            
-            <div class="md:flex items-center">
-                <div class="md:w-1/2 mb-10 md:mb-0 md:pr-10">
-                    <h3 class="text-2xl font-semibold text-gray-800 mb-4">My Professional Journey</h3>
-                    <p class="text-gray-600 mb-6">As a dedicated Case Manager at Key2Care, I've spent years helping individuals and families navigate complex social systems to access the support they need. My work is more than a job—it's a calling to serve and empower those in need.</p>
-                    
-                    <h3 class="text-2xl font-semibold text-gray-800 mb-4">My Passion for Community</h3>
-                    <p class="text-gray-600 mb-6">I believe that strong, harmonious communities are built on understanding, compassion, and mutual support. Through my work, I strive to bridge gaps, foster connections, and create environments where everyone can thrive.</p>
-                    
-                    <div class="bg-blue-50 p-6 rounded-lg">
-                        <h4 class="text-lg font-semibold text-blue-700 mb-3">Core Values</h4>
-                        <ul class="space-y-2">
-                            <li class="flex items-start">
-                                <i class="fas fa-check-circle text-blue-600 mt-1 mr-2"></i>
-                                <span class="text-gray-700">Compassion in every interaction</span>
-                            </li>
-                            <li class="flex items-start">
-                                <i class="fas fa-check-circle text-blue-600 mt-1 mr-2"></i>
-                                <span class="text-gray-700">Advocacy for those without a voice</span>
-                            </li>
-                            <li class="flex items-start">
-                                <i class="fas fa-check-circle text-blue-600 mt-1 mr-2"></i>
-                                <span class="text-gray-700">Commitment to community harmony</span>
-                            </li>
-                            <li class="flex items-start">
-                                <i class="fas fa-check-circle text-blue-600 mt-1 mr-2"></i>
-                                <span class="text-gray-700">Professional excellence in case management</span>
-                            </li>
-                        </ul>
-                    </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+                <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition duration-300">
+                    <div class="text-indigo-600 text-4xl font-bold mb-2" id="years-counter">0</div>
+                    <p class="text-gray-600">Years of Experience</p>
                 </div>
-                
-                <div class="md:w-1/2">
-                    <div class="bg-gray-50 p-8 rounded-xl shadow-sm">
-                        <h3 class="text-xl font-semibold text-gray-800 mb-6">Professional Highlights</h3>
-                        
-                        <div class="space-y-8">
-                            <div class="flex">
-                                <div class="flex-shrink-0">
-                                    <div class="flex items-center justify-center h-12 w-12 rounded-md bg-blue-100 text-blue-600">
-                                        <i class="fas fa-briefcase"></i>
-                                    </div>
-                                </div>
-                                <div class="ml-4">
-                                    <h4 class="text-lg font-medium text-gray-900">Key2Care Case Manager</h4>
-                                    <p class="text-gray-600 mt-1">Providing comprehensive case management services to individuals and families in need, connecting them with essential resources and support systems.</p>
-                                </div>
-                            </div>
-                            
-                            <div class="flex">
-                                <div class="flex-shrink-0">
-                                    <div class="flex items-center justify-center h-12 w-12 rounded-md bg-blue-100 text-blue-600">
-                                        <i class="fas fa-users"></i>
-                                    </div>
-                                </div>
-                                <div class="ml-4">
-                                    <h4 class="text-lg font-medium text-gray-900">Community Mediator</h4>
-                                    <p class="text-gray-600 mt-1">Facilitating dialogue and understanding between community members to resolve conflicts and strengthen neighborhood bonds.</p>
-                                </div>
-                            </div>
-                            
-                            <div class="flex">
-                                <div class="flex-shrink-0">
-                                    <div class="flex items-center justify-center h-12 w-12 rounded-md bg-blue-100 text-blue-600">
-                                        <i class="fas fa-lightbulb"></i>
-                                    </div>
-                                </div>
-                                <div class="ml-4">
-                                    <h4 class="text-lg font-medium text-gray-900">Program Developer</h4>
-                                    <p class="text-gray-600 mt-1">Creating innovative community programs that address social needs and promote inclusive participation from all community members.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition duration-300">
+                    <div class="text-indigo-600 text-4xl font-bold mb-2" id="clients-counter">0</div>
+                    <p class="text-gray-600">Clients Served</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition duration-300">
+                    <div class="text-indigo-600 text-4xl font-bold mb-2" id="success-counter">0</div>
+                    <p class="text-gray-600">Successful Cases</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Services Section -->
-    <section id="services" class="py-20 bg-gray-50">
+    <section id="services" class="py-20 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
                 <h2 class="text-3xl font-bold text-gray-900 mb-4">My Services</h2>
-                <div class="w-20 h-1 bg-blue-600 mx-auto"></div>
-                <p class="text-gray-600 max-w-2xl mx-auto mt-6">Comprehensive case management and community services designed to empower individuals and strengthen communities.</p>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto">Comprehensive case management solutions tailored to your unique needs and circumstances.</p>
             </div>
             
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Service Card 1 -->
-                <div class="bg-white rounded-xl shadow-sm overflow-hidden transition-slow card-hover">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Service 1 -->
+                <div class="bg-gray-50 rounded-lg overflow-hidden shadow-md card-hover transition duration-300">
                     <div class="p-6">
-                        <div class="flex items-center justify-center h-12 w-12 rounded-md bg-blue-100 text-blue-600 mb-4">
-                            <i class="fas fa-user-friends text-xl"></i>
+                        <div class="bg-indigo-100 w-12 h-12 rounded-full flex items-center justify-center mb-4">
+                            <i class="fas fa-clipboard-check text-indigo-600 text-xl"></i>
                         </div>
-                        <h3 class="text-xl font-semibold text-gray-900 mb-3">Individual Case Management</h3>
-                        <p class="text-gray-600">Personalized support plans tailored to each client's unique needs, connecting them with appropriate services and resources.</p>
-                    </div>
-                    <div class="px-6 py-4 bg-gray-50">
-                        <ul class="space-y-2">
-                            <li class="flex items-start">
-                                <i class="fas fa-check text-blue-500 mt-1 mr-2 text-xs"></i>
-                                <span class="text-gray-700 text-sm">Needs assessment</span>
-                            </li>
-                            <li class="flex items-start">
-                                <i class="fas fa-check text-blue-500 mt-1 mr-2 text-xs"></i>
-                                <span class="text-gray-700 text-sm">Service coordination</span>
-                            </li>
-                            <li class="flex items-start">
-                                <i class="fas fa-check text-blue-500 mt-1 mr-2 text-xs"></i>
-                                <span class="text-gray-700 text-sm">Progress monitoring</span>
-                            </li>
-                        </ul>
+                        <h3 class="text-xl font-semibold text-gray-900 mb-3">Case Assessment</h3>
+                        <p class="text-gray-600 mb-4">Thorough evaluation of your situation to develop a personalized case management plan.</p>
+                        <button class="text-indigo-600 font-medium hover:text-indigo-800 transition duration-300 service-details-btn" data-service="1">Learn more →</button>
                     </div>
                 </div>
                 
-                <!-- Service Card 2 -->
-                <div class="bg-white rounded-xl shadow-sm overflow-hidden transition-slow card-hover">
+                <!-- Service 2 -->
+                <div class="bg-gray-50 rounded-lg overflow-hidden shadow-md card-hover transition duration-300">
                     <div class="p-6">
-                        <div class="flex items-center justify-center h-12 w-12 rounded-md bg-blue-100 text-blue-600 mb-4">
-                            <i class="fas fa-home text-xl"></i>
+                        <div class="bg-indigo-100 w-12 h-12 rounded-full flex items-center justify-center mb-4">
+                            <i class="fas fa-network-wired text-indigo-600 text-xl"></i>
                         </div>
-                        <h3 class="text-xl font-semibold text-gray-900 mb-3">Community Development</h3>
-                        <p class="text-gray-600">Initiatives and programs designed to strengthen community bonds, improve quality of life, and foster inclusive participation.</p>
-                    </div>
-                    <div class="px-6 py-4 bg-gray-50">
-                        <ul class="space-y-2">
-                            <li class="flex items-start">
-                                <i class="fas fa-check text-blue-500 mt-1 mr-2 text-xs"></i>
-                                <span class="text-gray-700 text-sm">Neighborhood initiatives</span>
-                            </li>
-                            <li class="flex items-start">
-                                <i class="fas fa-check text-blue-500 mt-1 mr-2 text-xs"></i>
-                                <span class="text-gray-700 text-sm">Resource mapping</span>
-                            </li>
-                            <li class="flex items-start">
-                                <i class="fas fa-check text-blue-500 mt-1 mr-2 text-xs"></i>
-                                <span class="text-gray-700 text-sm">Capacity building</span>
-                            </li>
-                        </ul>
+                        <h3 class="text-xl font-semibold text-gray-900 mb-3">Resource Coordination</h3>
+                        <p class="text-gray-600 mb-4">Connecting you with the appropriate services and resources to meet your specific needs.</p>
+                        <button class="text-indigo-600 font-medium hover:text-indigo-800 transition duration-300 service-details-btn" data-service="2">Learn more →</button>
                     </div>
                 </div>
                 
-                <!-- Service Card 3 -->
-                <div class="bg-white rounded-xl shadow-sm overflow-hidden transition-slow card-hover">
+                <!-- Service 3 -->
+                <div class="bg-gray-50 rounded-lg overflow-hidden shadow-md card-hover transition duration-300">
                     <div class="p-6">
-                        <div class="flex items-center justify-center h-12 w-12 rounded-md bg-blue-100 text-blue-600 mb-4">
-                            <i class="fas fa-handshake text-xl"></i>
+                        <div class="bg-indigo-100 w-12 h-12 rounded-full flex items-center justify-center mb-4">
+                            <i class="fas fa-user-shield text-indigo-600 text-xl"></i>
                         </div>
-                        <h3 class="text-xl font-semibold text-gray-900 mb-3">Conflict Resolution</h3>
-                        <p class="text-gray-600">Mediation services to help resolve disputes between individuals, families, or community groups in a constructive manner.</p>
-                    </div>
-                    <div class="px-6 py-4 bg-gray-50">
-                        <ul class="space-y-2">
-                            <li class="flex items-start">
-                                <i class="fas fa-check text-blue-500 mt-1 mr-2 text-xs"></i>
-                                <span class="text-gray-700 text-sm">Mediation sessions</span>
-                            </li>
-                            <li class="flex items-start">
-                                <i class="fas fa-check text-blue-500 mt-1 mr-2 text-xs"></i>
-                                <span class="text-gray-700 text-sm">Communication training</span>
-                            </li>
-                            <li class="flex items-start">
-                                <i class="fas fa-check text-blue-500 mt-1 mr-2 text-xs"></i>
-                                <span class="text-gray-700 text-sm">Restorative practices</span>
-                            </li>
-                        </ul>
+                        <h3 class="text-xl font-semibold text-gray-900 mb-3">Advocacy Services</h3>
+                        <p class="text-gray-600 mb-4">Representing your interests and ensuring your voice is heard in all matters.</p>
+                        <button class="text-indigo-600 font-medium hover:text-indigo-800 transition duration-300 service-details-btn" data-service="3">Learn more →</button>
                     </div>
                 </div>
                 
-                <!-- Service Card 4 -->
-                <div class="bg-white rounded-xl shadow-sm overflow-hidden transition-slow card-hover">
+                <!-- Service 4 -->
+                <div class="bg-gray-50 rounded-lg overflow-hidden shadow-md card-hover transition duration-300">
                     <div class="p-6">
-                        <div class="flex items-center justify-center h-12 w-12 rounded-md bg-blue-100 text-blue-600 mb-4">
-                            <i class="fas fa-heart text-xl"></i>
+                        <div class="bg-indigo-100 w-12 h-12 rounded-full flex items-center justify-center mb-4">
+                            <i class="fas fa-chart-line text-indigo-600 text-xl"></i>
                         </div>
-                        <h3 class="text-xl font-semibold text-gray-900 mb-3">Mental Health Advocacy</h3>
-                        <p class="text-gray-600">Supporting individuals with mental health challenges to access appropriate care and reduce stigma in the community.</p>
-                    </div>
-                    <div class="px-6 py-4 bg-gray-50">
-                        <ul class="space-y-2">
-                            <li class="flex items-start">
-                                <i class="fas fa-check text-blue-500 mt-1 mr-2 text-xs"></i>
-                                <span class="text-gray-700 text-sm">Resource navigation</span>
-                            </li>
-                            <li class="flex items-start">
-                                <i class="fas fa-check text-blue-500 mt-1 mr-2 text-xs"></i>
-                                <span class="text-gray-700 text-sm">Education programs</span>
-                            </li>
-                            <li class="flex items-start">
-                                <i class="fas fa-check text-blue-500 mt-1 mr-2 text-xs"></i>
-                                <span class="text-gray-700 text-sm">Support coordination</span>
-                            </li>
-                        </ul>
+                        <h3 class="text-xl font-semibold text-gray-900 mb-3">Progress Monitoring</h3>
+                        <p class="text-gray-600 mb-4">Regular evaluation and adjustment of your case plan to ensure optimal outcomes.</p>
+                        <button class="text-indigo-600 font-medium hover:text-indigo-800 transition duration-300 service-details-btn" data-service="4">Learn more →</button>
                     </div>
                 </div>
                 
-                <!-- Service Card 5 -->
-                <div class="bg-white rounded-xl shadow-sm overflow-hidden transition-slow card-hover">
+                <!-- Service 5 -->
+                <div class="bg-gray-50 rounded-lg overflow-hidden shadow-md card-hover transition duration-300">
                     <div class="p-6">
-                        <div class="flex items-center justify-center h-12 w-12 rounded-md bg-blue-100 text-blue-600 mb-4">
-                            <i class="fas fa-graduation-cap text-xl"></i>
+                        <div class="bg-indigo-100 w-12 h-12 rounded-full flex items-center justify-center mb-4">
+                            <i class="fas fa-hand-holding-heart text-indigo-600 text-xl"></i>
                         </div>
-                        <h3 class="text-xl font-semibold text-gray-900 mb-3">Workshops & Training</h3>
-                        <p class="text-gray-600">Educational programs for community members and professionals on topics related to social services and community harmony.</p>
-                    </div>
-                    <div class="px-6 py-4 bg-gray-50">
-                        <ul class="space-y-2">
-                            <li class="flex items-start">
-                                <i class="fas fa-check text-blue-500 mt-1 mr-2 text-xs"></i>
-                                <span class="text-gray-700 text-sm">Cultural competency</span>
-                            </li>
-                            <li class="flex items-start">
-                                <i class="fas fa-check text-blue-500 mt-1 mr-2 text-xs"></i>
-                                <span class="text-gray-700 text-sm">Trauma-informed care</span>
-                            </li>
-                            <li class="flex items-start">
-                                <i class="fas fa-check text-blue-500 mt-1 mr-2 text-xs"></i>
-                                <span class="text-gray-700 text-sm">Community leadership</span>
-                            </li>
-                        </ul>
+                        <h3 class="text-xl font-semibold text-gray-900 mb-3">Support Services</h3>
+                        <p class="text-gray-600 mb-4">Providing emotional support and guidance throughout your case management journey.</p>
+                        <button class="text-indigo-600 font-medium hover:text-indigo-800 transition duration-300 service-details-btn" data-service="5">Learn more →</button>
                     </div>
                 </div>
                 
-                <!-- Service Card 6 -->
-                <div class="bg-white rounded-xl shadow-sm overflow-hidden transition-slow card-hover">
+                <!-- Service 6 -->
+                <div class="bg-gray-50 rounded-lg overflow-hidden shadow-md card-hover transition duration-300">
                     <div class="p-6">
-                        <div class="flex items-center justify-center h-12 w-12 rounded-md bg-blue-100 text-blue-600 mb-4">
-                            <i class="fas fa-hands-helping text-xl"></i>
+                        <div class="bg-indigo-100 w-12 h-12 rounded-full flex items-center justify-center mb-4">
+                            <i class="fas fa-file-contract text-indigo-600 text-xl"></i>
                         </div>
-                        <h3 class="text-xl font-semibold text-gray-900 mb-3">Volunteer Coordination</h3>
-                        <p class="text-gray-600">Matching community volunteers with meaningful opportunities to serve and strengthening the culture of mutual aid.</p>
+                        <h3 class="text-xl font-semibold text-gray-900 mb-3">Documentation</h3>
+                        <p class="text-gray-600 mb-4">Maintaining accurate records and reports to track progress and ensure compliance.</p>
+                        <button class="text-indigo-600 font-medium hover:text-indigo-800 transition duration-300 service-details-btn" data-service="6">Learn more →</button>
                     </div>
-                    <div class="px-6 py-4 bg-gray-50">
-                        <ul class="space-y-2">
-                            <li class="flex items-start">
-                                <i class="fas fa-check text-blue-500 mt-1 mr-2 text-xs"></i>
-                                <span class="text-gray-700 text-sm">Volunteer recruitment</span>
-                            </li>
-                            <li class="flex items-start">
-                                <i class="fas fa-check text-blue-500 mt-1 mr-2 text-xs"></i>
-                                <span class="text-gray-700 text-sm">Training programs</span>
-                            </li>
-                            <li class="flex items-start">
-                                <i class="fas fa-check text-blue-500 mt-1 mr-2 text-xs"></i>
-                                <span class="text-gray-700 text-sm">Impact assessment</span>
-                            </li>
-                        </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Service Details Modal -->
+    <div id="service-modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center hidden">
+        <div class="bg-white rounded-lg max-w-2xl w-full mx-4 max-h-[90vh] overflow-y-auto">
+            <div class="p-6">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 id="modal-title" class="text-2xl font-bold text-gray-900"></h3>
+                    <button id="close-modal" class="text-gray-500 hover:text-gray-700">
+                        <i class="fas fa-times text-xl"></i>
+                    </button>
+                </div>
+                <div id="modal-content" class="text-gray-700">
+                    <!-- Content will be loaded here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="md:flex md:items-center md:space-x-12">
+                <div class="md:w-1/2 mb-10 md:mb-0">
+                    <div class="bg-white p-8 rounded-lg shadow-md">
+                        <h2 class="text-3xl font-bold text-gray-900 mb-6">About Brian Kirinya</h2>
+                        
+                        <!-- Tab Buttons -->
+                        <div class="flex border-b border-gray-200 mb-6">
+                            <button class="tab-btn py-2 px-4 font-medium text-gray-600 hover:text-indigo-600 active" data-tab="experience">Experience</button>
+                            <button class="tab-btn py-2 px-4 font-medium text-gray-600 hover:text-indigo-600" data-tab="education">Education</button>
+                            <button class="tab-btn py-2 px-4 font-medium text-gray-600 hover:text-indigo-600" data-tab="approach">Approach</button>
+                        </div>
+                        
+                        <!-- Tab Content -->
+                        <div class="tab-content active" id="experience">
+                            <p class="text-gray-700 mb-4">With over 15 years of experience in case management, Brian has helped hundreds of clients navigate complex systems and achieve their goals.</p>
+                            <ul class="list-disc pl-5 space-y-2 text-gray-700">
+                                <li>Senior Case Manager at Hope Services (2015-Present)</li>
+                                <li>Case Management Supervisor at Community Care (2010-2015)</li>
+                                <li>Case Worker at Family Support Services (2005-2010)</li>
+                                <li>Specialized training in trauma-informed care and crisis intervention</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="tab-content" id="education">
+                            <p class="text-gray-700 mb-4">Brian's educational background provides a strong foundation for his case management practice.</p>
+                            <ul class="list-disc pl-5 space-y-2 text-gray-700">
+                                <li>Master of Social Work (MSW), University of Washington</li>
+                                <li>Bachelor of Arts in Psychology, Seattle University</li>
+                                <li>Certified Case Manager (CCM) credential</li>
+                                <li>Ongoing professional development in mental health first aid and cultural competency</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="tab-content" id="approach">
+                            <p class="text-gray-700 mb-4">Brian's approach to case management is client-centered and strengths-based.</p>
+                            <ul class="list-disc pl-5 space-y-2 text-gray-700">
+                                <li>Focuses on empowering clients to achieve self-sufficiency</li>
+                                <li>Collaborative approach with other service providers</li>
+                                <li>Committed to cultural humility and accessibility</li>
+                                <li>Evidence-based practices tailored to individual needs</li>
+                                <li>Strong emphasis on building trust and rapport</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="md:w-1/2">
+                    <div class="bg-indigo-600 text-white p-8 rounded-lg shadow-md">
+                        <h3 class="text-2xl font-bold mb-6">Why Choose Me?</h3>
+                        <div class="space-y-6">
+                            <div class="flex items-start">
+                                <div class="bg-indigo-500 rounded-full p-2 mr-4">
+                                    <i class="fas fa-check text-white"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold mb-1">Personalized Attention</h4>
+                                    <p class="text-indigo-100">Every case receives my full attention and customized approach.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="bg-indigo-500 rounded-full p-2 mr-4">
+                                    <i class="fas fa-check text-white"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold mb-1">Extensive Network</h4>
+                                    <p class="text-indigo-100">Access to a wide range of resources and service providers.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="bg-indigo-500 rounded-full p-2 mr-4">
+                                    <i class="fas fa-check text-white"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold mb-1">Proven Results</h4>
+                                    <p class="text-indigo-100">Track record of successful outcomes for diverse cases.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="bg-indigo-500 rounded-full p-2 mr-4">
+                                    <i class="fas fa-check text-white"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold mb-1">Compassionate Care</h4>
+                                    <p class="text-indigo-100">Genuine concern for your wellbeing and success.</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -354,190 +338,181 @@
     </section>
 
     <!-- Testimonials Section -->
-    <section id="testimonials" class="py-20 bg-blue-600 text-white relative">
-        <div class="absolute inset-0 opacity-10">
-            <div class="absolute inset-0 bg-gradient-to-r from-blue-700 to-blue-500"></div>
-        </div>
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+    <section id="testimonials" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
-                <h2 class="text-3xl font-bold mb-4">Community Voices</h2>
-                <div class="w-20 h-1 bg-white mx-auto"></div>
-                <p class="max-w-2xl mx-auto mt-6 opacity-90">Hear from those who have worked with Brian and experienced his commitment to service firsthand.</p>
+                <h2 class="text-3xl font-bold text-gray-900 mb-4">Client Testimonials</h2>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto">Hear what my clients have to say about their experiences.</p>
             </div>
             
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- Testimonial 1 -->
-                <div class="testimonial-bg text-gray-800 p-8 rounded-xl shadow-lg">
+                <div class="testimonial-card bg-gray-50 p-6 rounded-lg shadow-md">
                     <div class="flex items-center mb-4">
-                        <div class="flex-shrink-0">
-                            <div class="h-12 w-12 rounded-full bg-blue-100 flex items-center justify-center text-blue-600">
-                                <i class="fas fa-user"></i>
-                            </div>
+                        <div class="w-12 h-12 rounded-full overflow-hidden mr-4">
+                            <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="Sarah Johnson" class="w-full h-full object-cover">
                         </div>
-                        <div class="ml-4">
-                            <h4 class="text-lg font-semibold">Sarah Johnson</h4>
-                            <p class="text-gray-600 text-sm">Community Member</p>
+                        <div>
+                            <h4 class="font-semibold text-gray-900">Sarah Johnson</h4>
+                            <p class="text-sm text-gray-600">Social Services Client</p>
                         </div>
                     </div>
-                    <p class="italic mb-4">"Brian's dedication to our neighborhood is unmatched. He helped mediate a long-standing dispute between neighbors that had been dividing our block for years. His patience and wisdom brought peace where we thought it was impossible."</p>
-                    <div class="flex text-yellow-400">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
+                    <div class="flex mb-2">
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
                     </div>
+                    <p class="text-gray-700">"Brian helped me navigate the complex healthcare system when I was dealing with my mother's dementia. His knowledge and compassion made all the difference during a very difficult time."</p>
                 </div>
                 
                 <!-- Testimonial 2 -->
-                <div class="testimonial-bg text-gray-800 p-8 rounded-xl shadow-lg">
+                <div class="testimonial-card bg-gray-50 p-6 rounded-lg shadow-md">
                     <div class="flex items-center mb-4">
-                        <div class="flex-shrink-0">
-                            <div class="h-12 w-12 rounded-full bg-blue-100 flex items-center justify-center text-blue-600">
-                                <i class="fas fa-user"></i>
-                            </div>
+                        <div class="w-12 h-12 rounded-full overflow-hidden mr-4">
+                            <img src="https://randomuser.me/api/portraits/men/54.jpg" alt="Michael Chen" class="w-full h-full object-cover">
                         </div>
-                        <div class="ml-4">
-                            <h4 class="text-lg font-semibold">Michael Rodriguez</h4>
-                            <p class="text-gray-600 text-sm">Key2Care Client</p>
+                        <div>
+                            <h4 class="font-semibold text-gray-900">Michael Chen</h4>
+                            <p class="text-sm text-gray-600">Veteran Services Client</p>
                         </div>
                     </div>
-                    <p class="italic mb-4">"As someone navigating the complex world of social services, Brian was a godsend. He didn't just connect me with resources—he empowered me to advocate for myself. His case management approach is both professional and deeply personal."</p>
-                    <div class="flex text-yellow-400">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
+                    <div class="flex mb-2">
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
                     </div>
+                    <p class="text-gray-700">"As a veteran, I was struggling to access the benefits I earned. Brian not only helped me get what I needed but also connected me with job training programs that changed my life."</p>
                 </div>
                 
                 <!-- Testimonial 3 -->
-                <div class="testimonial-bg text-gray-800 p-8 rounded-xl shadow-lg">
+                <div class="testimonial-card bg-gray-50 p-6 rounded-lg shadow-md">
                     <div class="flex items-center mb-4">
-                        <div class="flex-shrink-0">
-                            <div class="h-12 w-12 rounded-full bg-blue-100 flex items-center justify-center text-blue-600">
-                                <i class="fas fa-user"></i>
-                            </div>
+                        <div class="w-12 h-12 rounded-full overflow-hidden mr-4">
+                            <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Maria Garcia" class="w-full h-full object-cover">
                         </div>
-                        <div class="ml-4">
-                            <h4 class="text-lg font-semibold">Dr. Amina Patel</h4>
-                            <p class="text-gray-600 text-sm">Community Health Director</p>
+                        <div>
+                            <h4 class="font-semibold text-gray-900">Maria Garcia</h4>
+                            <p class="text-sm text-gray-600">Family Services Client</p>
                         </div>
                     </div>
-                    <p class="italic mb-4">"In our collaborative work on community health initiatives, Brian consistently demonstrates an exceptional ability to bridge gaps between organizations and residents. His understanding of community dynamics makes him an invaluable partner in any project."</p>
-                    <div class="flex text-yellow-400">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star-half-alt"></i>
+                    <div class="flex mb-2">
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
                     </div>
+                    <p class="text-gray-700">"When our family was facing homelessness, Brian worked tirelessly to find us housing and connect us with resources to get back on our feet. He treated us with dignity and respect throughout the process."</p>
                 </div>
             </div>
             
-            <div class="mt-12 text-center">
-                <a href="#contact" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-blue-700 bg-white hover:bg-gray-100 transition-slow">
-                    Share Your Experience
-                    <i class="fas fa-arrow-right ml-2"></i>
-                </a>
+            <!-- Testimonial Navigation -->
+            <div class="flex justify-center mt-12 space-x-2">
+                <button class="testimonial-nav w-3 h-3 rounded-full bg-gray-300" data-testimonial="1"></button>
+                <button class="testimonial-nav w-3 h-3 rounded-full bg-gray-300" data-testimonial="2"></button>
+                <button class="testimonial-nav w-3 h-3 rounded-full bg-gray-300" data-testimonial="3"></button>
             </div>
         </div>
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="py-20 bg-white">
+    <section id="contact" class="py-20 bg-indigo-600 text-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl font-bold text-gray-900 mb-4">Get In Touch</h2>
-                <div class="w-20 h-1 bg-blue-600 mx-auto"></div>
-                <p class="text-gray-600 max-w-2xl mx-auto mt-6">I'm always interested in hearing about new opportunities to serve the community or collaborate on projects. Reach out and let's start a conversation.</p>
-            </div>
-            
-            <div class="bg-gray-50 rounded-xl shadow-sm overflow-hidden">
-                <div class="md:flex">
-                    <div class="md:w-1/2 bg-blue-600 text-white p-10">
-                        <h3 class="text-2xl font-semibold mb-6">Contact Information</h3>
-                        
-                        <div class="space-y-6">
-                            <div class="flex items-start">
-                                <div class="flex-shrink-0">
-                                    <i class="fas fa-envelope text-xl"></i>
-                                </div>
-                                <div class="ml-4">
-                                    <h4 class="text-lg font-medium">Email</h4>
-                                    <p class="mt-1 opacity-90">brian.kirinya@key2care.org</p>
-                                </div>
+            <div class="md:flex md:items-center md:space-x-12">
+                <div class="md:w-1/2 mb-10 md:mb-0">
+                    <h2 class="text-3xl font-bold mb-6">Get In Touch</h2>
+                    <p class="text-indigo-100 mb-8">Ready to discuss your case management needs? Contact me today for a free initial consultation.</p>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-start">
+                            <div class="bg-indigo-500 rounded-full p-2 mr-4">
+                                <i class="fas fa-map-marker-alt"></i>
                             </div>
-                            
-                            <div class="flex items-start">
-                                <div class="flex-shrink-0">
-                                    <i class="fas fa-phone-alt text-xl"></i>
-                                </div>
-                                <div class="ml-4">
-                                    <h4 class="text-lg font-medium">Phone</h4>
-                                    <p class="mt-1 opacity-90">(555) 123-4567</p>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-start">
-                                <div class="flex-shrink-0">
-                                    <i class="fas fa-building text-xl"></i>
-                                </div>
-                                <div class="ml-4">
-                                    <h4 class="text-lg font-medium">Key2Care Office</h4>
-                                    <p class="mt-1 opacity-90">123 Community Way<br>Cityville, ST 12345</p>
-                                </div>
+                            <div>
+                                <h4 class="font-semibold mb-1">Office Location</h4>
+                                <p class="text-indigo-100">1234 Case Management Ave, Suite 200<br>Seattle, WA 98101</p>
                             </div>
                         </div>
                         
-                        <div class="mt-10">
-                            <h4 class="text-lg font-medium mb-4">Connect Socially</h4>
-                            <div class="flex space-x-4">
-                                <a href="#" class="h-10 w-10 rounded-full bg-blue-500 flex items-center justify-center hover:bg-blue-400 transition-slow">
-                                    <i class="fab fa-linkedin-in"></i>
-                                </a>
-                                <a href="#" class="h-10 w-10 rounded-full bg-blue-500 flex items-center justify-center hover:bg-blue-400 transition-slow">
-                                    <i class="fab fa-twitter"></i>
-                                </a>
-                                <a href="#" class="h-10 w-10 rounded-full bg-blue-500 flex items-center justify-center hover:bg-blue-400 transition-slow">
-                                    <i class="fab fa-facebook-f"></i>
-                                </a>
+                        <div class="flex items-start">
+                            <div class="bg-indigo-500 rounded-full p-2 mr-4">
+                                <i class="fas fa-phone-alt"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold mb-1">Phone</h4>
+                                <p class="text-indigo-100">(206) 555-1234</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="bg-indigo-500 rounded-full p-2 mr-4">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold mb-1">Email</h4>
+                                <p class="text-indigo-100">brian@casemanagement.com</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="bg-indigo-500 rounded-full p-2 mr-4">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold mb-1">Hours</h4>
+                                <p class="text-indigo-100">Monday-Friday: 9am-5pm<br>Weekends: By appointment</p>
                             </div>
                         </div>
                     </div>
                     
-                    <div class="md:w-1/2 p-10">
-                        <h3 class="text-2xl font-semibold text-gray-900 mb-6">Send a Message</h3>
-                        <form>
-                            <div class="grid grid-cols-1 gap-6">
-                                <div>
-                                    <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Your Name</label>
-                                    <input type="text" id="name" class="block w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500" placeholder="John Doe">
-                                </div>
-                                
-                                <div>
-                                    <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
-                                    <input type="email" id="email" class="block w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500" placeholder="you@example.com">
-                                </div>
-                                
-                                <div>
-                                    <label for="subject" class="block text-sm font-medium text-gray-700 mb-1">Subject</label>
-                                    <input type="text" id="subject" class="block w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500" placeholder="How can I help?">
-                                </div>
-                                
-                                <div>
-                                    <label for="message" class="block text-sm font-medium text-gray-700 mb-1">Message</label>
-                                    <textarea id="message" rows="4" class="block w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500" placeholder="Your message here..."></textarea>
-                                </div>
-                                
-                                <div>
-                                    <button type="submit" class="w-full flex justify-center items-center px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-slow">
-                                        Send Message
-                                        <i class="fas fa-paper-plane ml-2"></i>
-                                    </button>
-                                </div>
+                    <div class="mt-8 flex space-x-4">
+                        <a href="#" class="bg-white text-indigo-600 w-10 h-10 rounded-full flex items-center justify-center hover:bg-indigo-100 transition duration-300">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="bg-white text-indigo-600 w-10 h-10 rounded-full flex items-center justify-center hover:bg-indigo-100 transition duration-300">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="#" class="bg-white text-indigo-600 w-10 h-10 rounded-full flex items-center justify-center hover:bg-indigo-100 transition duration-300">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="md:w-1/2">
+                    <div class="bg-white rounded-lg shadow-xl p-8">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-6">Send a Message</h3>
+                        <form id="contact-form">
+                            <div class="mb-4">
+                                <label for="name" class="block text-gray-700 font-medium mb-2">Name</label>
+                                <input type="text" id="name" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
                             </div>
+                            <div class="mb-4">
+                                <label for="email" class="block text-gray-700 font-medium mb-2">Email</label>
+                                <input type="email" id="email" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                            </div>
+                            <div class="mb-4">
+                                <label for="phone" class="block text-gray-700 font-medium mb-2">Phone</label>
+                                <input type="tel" id="phone" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                            </div>
+                            <div class="mb-4">
+                                <label for="subject" class="block text-gray-700 font-medium mb-2">Subject</label>
+                                <select id="subject" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                                    <option value="">Select a subject</option>
+                                    <option value="general">General Inquiry</option>
+                                    <option value="services">Services Information</option>
+                                    <option value="appointment">Schedule Appointment</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            <div class="mb-6">
+                                <label for="message" class="block text-gray-700 font-medium mb-2">Message</label>
+                                <textarea id="message" rows="4" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"></textarea>
+                            </div>
+                            <button type="submit" class="w-full bg-indigo-600 text-white py-3 rounded-md font-medium hover:bg-indigo-700 transition duration-300">Send Message</button>
                         </form>
                     </div>
                 </div>
@@ -545,83 +520,320 @@
         </div>
     </section>
 
+    <!-- Success Modal -->
+    <div id="success-modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center hidden">
+        <div class="bg-white rounded-lg max-w-md w-full mx-4 p-8 text-center">
+            <div class="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                <i class="fas fa-check text-green-600 text-2xl"></i>
+            </div>
+            <h3 class="text-2xl font-bold text-gray-900 mb-2">Message Sent!</h3>
+            <p class="text-gray-700 mb-6">Thank you for reaching out. I'll get back to you within 24 hours.</p>
+            <button id="close-success-modal" class="bg-indigo-600 text-white px-6 py-2 rounded-md font-medium hover:bg-indigo-700 transition duration-300">Close</button>
+        </div>
+    </div>
+
     <!-- Footer -->
     <footer class="bg-gray-900 text-white py-12">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="md:flex md:justify-between">
-                <div class="mb-8 md:mb-0">
-                    <div class="flex items-center">
-                        <i class="fas fa-hands-helping text-blue-400 text-2xl mr-2"></i>
-                        <span class="text-xl font-bold">Brian Kirinya</span>
-                    </div>
-                    <p class="mt-4 text-gray-400 max-w-xs">Dedicated case manager and community advocate working to create harmonious communities through compassionate service.</p>
+            <div class="md:flex md:items-center md:justify-between">
+                <div class="flex items-center mb-6 md:mb-0">
+                    <i class="fas fa-hands-helping text-indigo-400 text-2xl mr-2"></i>
+                    <span class="text-xl font-bold">Brian Kirinya</span>
                 </div>
-                
-                <div class="grid grid-cols-2 gap-8 md:grid-cols-3">
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-8">
                     <div>
-                        <h3 class="text-sm font-semibold text-gray-400 tracking-wider uppercase mb-4">Navigation</h3>
+                        <h4 class="text-sm font-semibold uppercase tracking-wider mb-4">Navigation</h4>
                         <ul class="space-y-2">
-                            <li><a href="#home" class="text-gray-300 hover:text-white transition-slow">Home</a></li>
-                            <li><a href="#about" class="text-gray-300 hover:text-white transition-slow">About</a></li>
-                            <li><a href="#services" class="text-gray-300 hover:text-white transition-slow">Services</a></li>
-                            <li><a href="#testimonials" class="text-gray-300 hover:text-white transition-slow">Testimonials</a></li>
-                            <li><a href="#contact" class="text-gray-300 hover:text-white transition-slow">Contact</a></li>
+                            <li><a href="#home" class="text-gray-400 hover:text-white transition duration-300">Home</a></li>
+                            <li><a href="#services" class="text-gray-400 hover:text-white transition duration-300">Services</a></li>
+                            <li><a href="#about" class="text-gray-400 hover:text-white transition duration-300">About</a></li>
+                            <li><a href="#testimonials" class="text-gray-400 hover:text-white transition duration-300">Testimonials</a></li>
+                            <li><a href="#contact" class="text-gray-400 hover:text-white transition duration-300">Contact</a></li>
                         </ul>
                     </div>
-                    
                     <div>
-                        <h3 class="text-sm font-semibold text-gray-400 tracking-wider uppercase mb-4">Services</h3>
+                        <h4 class="text-sm font-semibold uppercase tracking-wider mb-4">Services</h4>
                         <ul class="space-y-2">
-                            <li><a href="#" class="text-gray-300 hover:text-white transition-slow">Case Management</a></li>
-                            <li><a href="#" class="text-gray-300 hover:text-white transition-slow">Community Development</a></li>
-                            <li><a href="#" class="text-gray-300 hover:text-white transition-slow">Conflict Resolution</a></li>
-                            <li><a href="#" class="text-gray-300 hover:text-white transition-slow">Workshops</a></li>
-                            <li><a href="#" class="text-gray-300 hover:text-white transition-slow">Volunteer Coordination</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Case Assessment</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Resource Coordination</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Advocacy Services</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Progress Monitoring</a></li>
                         </ul>
                     </div>
-                    
-                    <div>
-                        <h3 class="text-sm font-semibold text-gray-400 tracking-wider uppercase mb-4">Legal</h3>
+                    <div class="col-span-2 md:col-span-1">
+                        <h4 class="text-sm font-semibold uppercase tracking-wider mb-4">Legal</h4>
                         <ul class="space-y-2">
-                            <li><a href="#" class="text-gray-300 hover:text-white transition-slow">Privacy Policy</a></li>
-                            <li><a href="#" class="text-gray-300 hover:text-white transition-slow">Terms of Service</a></li>
-                            <li><a href="#" class="text-gray-300 hover:text-white transition-slow">Disclaimer</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Privacy Policy</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Terms of Service</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Accessibility</a></li>
                         </ul>
                     </div>
                 </div>
             </div>
-            
-            <div class="mt-12 pt-8 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center">
-                <p class="text-gray-400 text-sm">© 2023 Brian Kirinya. All rights reserved.</p>
-                <div class="mt-4 md:mt-0 flex space-x-6">
-                    <a href="#" class="text-gray-400 hover:text-white transition-slow">
-                        <i class="fab fa-linkedin-in"></i>
-                    </a>
-                    <a href="#" class="text-gray-400 hover:text-white transition-slow">
-                        <i class="fab fa-twitter"></i>
-                    </a>
-                    <a href="#" class="text-gray-400 hover:text-white transition-slow">
-                        <i class="fab fa-facebook-f"></i>
-                    </a>
-                </div>
+            <div class="mt-12 pt-8 border-t border-gray-800 text-center text-gray-400 text-sm">
+                <p>&copy; 2023 Brian Kirinya Case Management. All rights reserved.</p>
             </div>
         </div>
     </footer>
 
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="fixed bottom-8 right-8 bg-indigo-600 text-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg hover:bg-indigo-700 transition duration-300 hidden">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
     <script>
         // Mobile menu toggle
-        document.getElementById('mobile-menu-button').addEventListener('click', function() {
-            const menu = document.getElementById('mobile-menu');
-            if (menu.classList.contains('hidden')) {
-                menu.classList.remove('hidden');
-            } else {
-                menu.classList.add('hidden');
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        // Close mobile menu when clicking on a link
+        const mobileLinks = mobileMenu.querySelectorAll('a');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+        
+        // Counter animation for stats
+        function animateCounter(elementId, target, duration = 2000) {
+            const element = document.getElementById(elementId);
+            const start = 0;
+            const increment = target / (duration / 16);
+            let current = start;
+            
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    clearInterval(timer);
+                    current = target;
+                }
+                element.textContent = Math.floor(current);
+            }, 16);
+        }
+        
+        // Initialize counters when stats section comes into view
+        const statsSection = document.querySelector('.bg-indigo-50');
+        const observer = new IntersectionObserver((entries) => {
+            if (entries[0].isIntersecting) {
+                animateCounter('years-counter', 15);
+                animateCounter('clients-counter', 320);
+                animateCounter('success-counter', 280);
+                observer.unobserve(statsSection);
+            }
+        }, { threshold: 0.5 });
+        
+        observer.observe(statsSection);
+        
+        // Service details modal
+        const serviceButtons = document.querySelectorAll('.service-details-btn');
+        const serviceModal = document.getElementById('service-modal');
+        const closeModal = document.getElementById('close-modal');
+        const modalTitle = document.getElementById('modal-title');
+        const modalContent = document.getElementById('modal-content');
+        
+        const serviceDetails = {
+            1: {
+                title: "Case Assessment",
+                content: `
+                    <p class="mb-4">My comprehensive case assessment service involves a thorough evaluation of your unique situation to develop a personalized case management plan.</p>
+                    <h4 class="font-semibold text-lg mb-2">What's Included:</h4>
+                    <ul class="list-disc pl-5 mb-4 space-y-1">
+                        <li>Initial consultation to understand your needs and goals</li>
+                        <li>Detailed review of your current situation and challenges</li>
+                        <li>Identification of available resources and support systems</li>
+                        <li>Development of a customized action plan</li>
+                        <li>Recommendations for next steps</li>
+                    </ul>
+                    <p>This service typically takes 1-2 hours and can be conducted in person or virtually.</p>
+                `
+            },
+            2: {
+                title: "Resource Coordination",
+                content: `
+                    <p class="mb-4">I help connect you with the appropriate services and resources to meet your specific needs, saving you time and frustration.</p>
+                    <h4 class="font-semibold text-lg mb-2">Services Include:</h4>
+                    <ul class="list-disc pl-5 mb-4 space-y-1">
+                        <li>Referrals to specialized service providers</li>
+                        <li>Assistance with applications for benefits and programs</li>
+                        <li>Coordination between multiple service providers</li>
+                        <li>Follow-up to ensure connections are successful</li>
+                        <li>Ongoing resource management as needs change</li>
+                    </ul>
+                    <p>I maintain an extensive network of trusted providers across various sectors including healthcare, housing, employment, and legal services.</p>
+                `
+            },
+            3: {
+                title: "Advocacy Services",
+                content: `
+                    <p class="mb-4">I represent your interests and ensure your voice is heard in all matters related to your case.</p>
+                    <h4 class="font-semibold text-lg mb-2">Advocacy Services Include:</h4>
+                    <ul class="list-disc pl-5 mb-4 space-y-1">
+                        <li>Accompanying you to meetings and appointments</li>
+                        <li>Communicating with service providers on your behalf</li>
+                        <li>Navigating complex bureaucracies and systems</li>
+                        <li>Ensuring your rights are protected</li>
+                        <li>Mediating conflicts between parties</li>
+                    </ul>
+                    <p>My advocacy is always client-directed, meaning I follow your lead while providing expert guidance.</p>
+                `
+            },
+            4: {
+                title: "Progress Monitoring",
+                content: `
+                    <p class="mb-4">I provide regular evaluation and adjustment of your case plan to ensure you're making progress toward your goals.</p>
+                    <h4 class="font-semibold text-lg mb-2">Monitoring Includes:</h4>
+                    <ul class="list-disc pl-5 mb-4 space-y-1">
+                        <li>Scheduled check-ins to assess progress</li>
+                        <li>Adjustment of strategies as needed</li>
+                        <li>Celebration of milestones and achievements</li>
+                        <li>Identification of new or emerging needs</li>
+                        <li>Detailed progress reports</li>
+                    </ul>
+                    <p>Monitoring frequency is customized based on your needs, ranging from weekly to monthly check-ins.</p>
+                `
+            },
+            5: {
+                title: "Support Services",
+                content: `
+                    <p class="mb-4">I provide emotional support and guidance throughout your case management journey.</p>
+                    <h4 class="font-semibold text-lg mb-2">Support Services Include:</h4>
+                    <ul class="list-disc pl-5 mb-4 space-y-1">
+                        <li>Active listening and validation</li>
+                        <li>Crisis intervention when needed</li>
+                        <li>Emotional support during challenging processes</li>
+                        <li>Encouragement and motivation</li>
+                        <li>Referrals to counseling when appropriate</li>
+                    </ul>
+                    <p>My approach is always trauma-informed and culturally sensitive, recognizing the whole person in the context of their life experiences.</p>
+                `
+            },
+            6: {
+                title: "Documentation",
+                content: `
+                    <p class="mb-4">I maintain accurate records and reports to track progress and ensure compliance with various requirements.</p>
+                    <h4 class="font-semibold text-lg mb-2">Documentation Services:</h4>
+                    <ul class="list-disc pl-5 mb-4 space-y-1">
+                        <li>Case notes and progress documentation</li>
+                        <li>Required reports for agencies and programs</li>
+                        <li>Maintenance of release forms and consents</li>
+                        <li>Secure storage of sensitive information</li>
+                        <li>Preparation of documents for hearings or reviews</li>
+                    </ul>
+                    <p>All documentation is handled with strict confidentiality and in compliance with HIPAA and other privacy regulations.</p>
+                `
+            }
+        };
+        
+        serviceButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const serviceId = button.getAttribute('data-service');
+                modalTitle.textContent = serviceDetails[serviceId].title;
+                modalContent.innerHTML = serviceDetails[serviceId].content;
+                serviceModal.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+            });
+        });
+        
+        closeModal.addEventListener('click', () => {
+            serviceModal.classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        });
+        
+        // Close modal when clicking outside content
+        serviceModal.addEventListener('click', (e) => {
+            if (e.target === serviceModal) {
+                serviceModal.classList.add('hidden');
+                document.body.style.overflow = 'auto';
             }
         });
-
+        
+        // Tab system for about section
+        const tabButtons = document.querySelectorAll('.tab-btn');
+        const tabContents = document.querySelectorAll('.tab-content');
+        
+        tabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const tabId = button.getAttribute('data-tab');
+                
+                // Remove active class from all buttons and contents
+                tabButtons.forEach(btn => btn.classList.remove('active'));
+                tabContents.forEach(content => content.classList.remove('active'));
+                
+                // Add active class to clicked button and corresponding content
+                button.classList.add('active');
+                document.getElementById(tabId).classList.add('active');
+            });
+        });
+        
+        // Testimonial navigation
+        const testimonialNavs = document.querySelectorAll('.testimonial-nav');
+        const testimonialCards = document.querySelectorAll('.testimonial-card');
+        
+        testimonialNavs.forEach(nav => {
+            nav.addEventListener('click', () => {
+                const testimonialId = nav.getAttribute('data-testimonial');
+                
+                // Remove active state from all navs
+                testimonialNavs.forEach(n => n.classList.remove('bg-indigo-600'));
+                
+                // Add active state to clicked nav
+                nav.classList.add('bg-indigo-600');
+                
+                // Highlight corresponding testimonial
+                testimonialCards.forEach(card => card.classList.remove('ring-2', 'ring-indigo-500'));
+                testimonialCards[testimonialId - 1].classList.add('ring-2', 'ring-indigo-500');
+            });
+        });
+        
+        // Contact form submission
+        const contactForm = document.getElementById('contact-form');
+        const successModal = document.getElementById('success-modal');
+        const closeSuccessModal = document.getElementById('close-success-modal');
+        
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Here you would typically send the form data to a server
+            // For this demo, we'll just show the success modal
+            
+            // Reset form
+            contactForm.reset();
+            
+            // Show success modal
+            successModal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        });
+        
+        closeSuccessModal.addEventListener('click', () => {
+            successModal.classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        });
+        
+        // Back to top button
+        const backToTopButton = document.getElementById('back-to-top');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.remove('hidden');
+            } else {
+                backToTopButton.classList.add('hidden');
+            }
+        });
+        
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
         // Smooth scrolling for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
+            anchor.addEventListener('click', function(e) {
                 e.preventDefault();
                 
                 const targetId = this.getAttribute('href');
@@ -632,12 +844,6 @@
                         top: targetElement.offsetTop - 80,
                         behavior: 'smooth'
                     });
-                    
-                    // Close mobile menu if open
-                    const mobileMenu = document.getElementById('mobile-menu');
-                    if (!mobileMenu.classList.contains('hidden')) {
-                        mobileMenu.classList.add('hidden');
-                    }
                 }
             });
         });
